@@ -1,0 +1,22 @@
+## Requirements
+cmcrameri
+
+h5py
+inkstone
+lmfit
+matplotlib 
+mkdocs
+mkdocs-material
+mkdocs-material-extensions
+numpy
+pandas
+periodictable
+polars
+rich
+SciencePlots
+scipy
+uncertainties
+numpy 
+wheel 
+setuptools
+

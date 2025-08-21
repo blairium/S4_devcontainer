@@ -1,0 +1,42 @@
+# Use Python slim base image
+FROM python:3.12-slim
+# Install necessary system dependencies
+RUN apt-get update && \
+    apt-get install -y gnupg2 curl && \
+    curl -fsSL https://ftp-master.debian.org/keys/archive-key-12.asc | gpg --batch --no-tty --dearmor -o /tmp/debian-archive-keyring.gpg && \
+    mv /tmp/debian-archive-keyring.gpg /usr/share/keyrings/debian-archive-keyring.gpg && \
+    curl -fsSL https://ftp-master.debian.org/keys/archive-key-12-security.asc | gpg --batch --no-tty --dearmor -o /tmp/debian-security-archive-keyring.gpg && \
+    mv /tmp/debian-security-archive-keyring.gpg /usr/share/keyrings/debian-security-archive-keyring.gpg
+RUN apt-get update 
+# RUN apt-get install -y python-tk  # Can't resolve
+RUN apt-get install -y python3-tk   # Can resolve
+RUN apt-get install -y tk-dev       # Can resolve
+RUN apt-get install -y make git gcc g++ python3-dev 
+RUN apt-get install -y libopenblas-dev libboost-all-dev 
+RUN apt-get install -y libfftw3-dev
+RUN apt-get install -y libsuitesparse-dev
+
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt requirements.txt 
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+
+# Set working directory
+WORKDIR /app
+
+# Clone your repository
+RUN git clone https://github.com/blairium/S4 .
+# WORKDIR /S4
+# RUN make  boost 
+RUN make S4_pyext
+# # Install project dependencies 
+WORKDIR /
+
+
+
+
+EXPOSE 5020
+EXPOSE 8080

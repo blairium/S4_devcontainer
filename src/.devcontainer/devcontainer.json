@@ -1,0 +1,28 @@
+{
+    "name": "RCWA Development Environment",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": "."
+    },
+	"customizations": {
+		"vscode": {
+		"extensions": ["streetsidesoftware.code-spell-checker","charliermarsh.ruff","ms-python.flake8","njpwerner.autodocstring"]
+		}
+	}
+
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [5000],
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "cat /etc/os-release",
+
+	// Configure tool-specific properties.
+	// "customizations": {},
+
+	// Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "devcontainer"
+}
